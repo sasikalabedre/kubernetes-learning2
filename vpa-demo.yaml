@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpa-demo
+  namespace: traffic-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpa-demo
+  template:
+    metadata:
+      labels:
+        app: vpa-demo
+    spec:
+      containers:
+        - name: vpa-demo
+          image: polinux/stress
+          command: ["stress"]
+          args: ["--cpu", "1", "--vm", "1", "--vm-bytes", "100M", "--vm-hang", "0"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 1Gi

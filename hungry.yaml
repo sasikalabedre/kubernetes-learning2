@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hungry
+  namespace: traffic-lab
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: hungry
+  template:
+    metadata:
+      labels:
+        app: hungry
+    spec:
+      containers:
+        - name: hungry
+          image: nginx:1.25-alpine
+          resources:
+            requests:
+              cpu: "250m"
+              memory: 64Mi
