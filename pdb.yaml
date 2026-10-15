@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web
+  namespace: traffic-lab
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels:
+      app: web

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graceful
+  namespace: traffic-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graceful
+  template:
+    metadata:
+      labels:
+        app: graceful
+    spec:
+      containers:
+        - name: graceful
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              trap 'echo got SIGTERM, cleaning up; exit 0' TERM
+              echo app started
+              sleep 3600 & wait
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "5"]

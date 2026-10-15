@@ -16,7 +16,7 @@ spec:
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
+          whenUnsatisfiable:  DoNotSchedule
           nodeTaintsPolicy: Honor
           labelSelector:
             matchLabels:
@@ -29,7 +29,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 64Mi
+              memory: 24Mi
             limits:
-              cpu: 200m
-              memory: 128Mi
+              cpu: 500m
+              memory: 64Mi
